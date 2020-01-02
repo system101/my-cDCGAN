@@ -30,7 +30,12 @@ class DatasetLoader:
 
         # # Return numpy arrays of shapes (M, 28, 28), (M,)
         # x_train, y_train = mnist['x_train'], mnist['y_train']
-        x_train, y_train = extract_training_samples('letters')
+        
+##        x_train, y_train = extract_training_samples('letters')
+
+        # my_EMNIST
+        print('### my_modified_EMNIST ###')
+        x_train, y_train = self.load_data_from_file('./my_modified_EMNIST.npz')
         return x_train, y_train
 
 
@@ -57,5 +62,34 @@ class DatasetLoader:
         X = X - 1.
         return X
 
+    def load_data_from_file(self,file_dir):
+        # returns: train_images , train_labels 
+        data = np.load(file_dir)
+        return data['arr_0'], data['arr_1']
 
+
+##def _data_tensor(images):
+##    '''
+##    images: (M, 28, 28), values in range [0, 255]
+##    returns: tensor of images shaped [M, 32, 32, 1], with values in range [-1, 1]
+##    '''
+##
+##    # Turn numpy array into a tensor X of shape [M, 28, 28, 1].
+##    X = tf.constant(images)
+##    X = tf.reshape(X, [-1, 28, 28, 1])
+##
+##    # resize images to img_size
+##    img_size = 28
+##    if img_size == 28:
+##        X = tf.image.resize(X, [29, 29]) # an awkward way of forcing some type converting
+##    X = tf.image.resize(X, [img_size, img_size])
+##
+##    # The data is currently in a range [0, 255].
+##    # Transform data to have a range [-1, 1].
+##    # We do this to match the range of tanh, the activation on the generator's output layer.
+##    X = X / 128.
+##    X = X - 1.
+##    return X
+##
+##x,y = load_data('./my_EMNIST.npz')
 

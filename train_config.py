@@ -8,7 +8,7 @@ class TrainConfig:
         
         def __init__(self):
             self.NUM_EPOCHS = 13
-            self.BATCH_SIZE = 128
+            self.BATCH_SIZE = 64
             self.LOG_FREQ = 1
             self.CHECKPOINT_FREQ = 25
 
@@ -59,7 +59,7 @@ class TrainConfig:
         self.log_freq = args.log_freq or defaults.LOG_FREQ
         self.num_epochs = args.num_epochs or defaults.NUM_EPOCHS
         self.checkpoint_freq = args.checkpoint_freq or defaults.CHECKPOINT_FREQ
-        self.should_continue = args.continue_train or False
+        self.should_continue = True #args.continue_train or False
         self.sample = args.sample or 0
         self.batch_size = args.batch_size or defaults.BATCH_SIZE
         
